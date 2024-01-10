@@ -3,6 +3,7 @@ import Vue, { createApp } from "vue";
 import { IconButton } from "@minids/common";
 import { LocationSelector } from "@minids/common";
 import { FundingAcknowledgment } from "@minids/common";
+import "../../assets/common.less";
 import SolarEclipse2023 from "./SolarEclipse2024.vue";
 import TransitionExpand from "./TransitionExpand.vue";
 import GifPlayPause from "./GifPlayPause.vue";

@@ -1,6 +1,7 @@
 import Vue, { createApp } from "vue";
 
 import { IconButton } from "@minids/common";
+import "../../assets/common.less";
 import { LocationSelector } from "@minids/common";
 import { FundingAcknowledgment } from "@minids/common";
 import AnnularEclipse2023 from "./AnnularEclipse2023.vue";
