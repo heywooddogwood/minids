@@ -8,15 +8,6 @@
 
 
 // CSS
-.no-select {
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-}
-.pointer-events {
-  pointer-events: auto;
-}
 
 :root {
   --default-font-size: clamp(0.7rem, min(1.7vh, 1.7vw), 1.1rem);
@@ -35,6 +26,7 @@ html {
 
   /* We don't want a scrollbar for the overall canvas */
   scrollbar-width: none;
+
   ::-webkit-scrollbar {
     display: none;
   }
@@ -47,36 +39,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-
   font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-
-a {
-  text-decoration: none;
-  color: #aec2fd;
-  pointer-events: auto;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  &[class^="share-network"]:hover {
-    text-decoration: none;
-    filter: brightness(75%);
-  }
-}
-
-/*
-  The main content of the mini.
-  The --app-content-height allows the app to shrink when the text is open
- */
-#main-content {
-  position: fixed;
-  width: 100%;
-  height: var(--app-content-height);
-  overflow: hidden;
-
-  transition: height 0.1s ease-in-out;
 }
 
 #app {
@@ -102,6 +65,19 @@ a {
   }
 }
 
+/*
+  The main content of the mini.
+  The --app-content-height allows the app to shrink when the text is open
+ */
+#main-content {
+  position: fixed;
+  width: 100%;
+  height: var(--app-content-height);
+  overflow: hidden;
+
+  transition: height 0.1s ease-in-out;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
@@ -111,8 +87,23 @@ a {
   opacity: 0;
 }
 
+a {
+  text-decoration: none;
+  color: #aec2fd;
+  pointer-events: auto;
 
-/* The modal loading window */
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &[class^="share-network"]:hover {
+    text-decoration: none;
+    filter: brightness(75%);
+  }
+}
+
+
+/* The modal when loading the window */
 .modal {
   position: absolute;
   top: 0px;
@@ -129,11 +120,13 @@ a {
 
 #modal-loading {
   background-color: #000;
+
   .container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
     .spinner {
       background-image: url("./lunar_loader.gif");
       background-repeat: no-repeat;
@@ -141,6 +134,7 @@ a {
       width: 3rem;
       height: 3rem;
     }
+
     p {
       margin: 0 0 0 1rem;
       padding: 0;
@@ -183,7 +177,7 @@ a {
 
 
 
-/* Splash screen */
+/* Splash screen, to introduce the app */
 #splash-overlay {
   position: fixed;
   align-items: center;
@@ -227,17 +221,17 @@ a {
   p {
     font-family: 'Highway Gothic Narrow', 'Roboto', sans-serif;
     vertical-align: middle;
-  }
-    
-  p.highlight {  
-    // make uppercase
-    text-transform: uppercase;
-    font-weight: bolder;
-  }
-  
-  p.small {
-    font-size: var(--default-font-size);
-    font-weight: bold;
+
+    &.highlight {
+      // make uppercase
+      text-transform: uppercase;
+      font-weight: bolder;
+    }
+
+    &.small {
+      font-size: var(--default-font-size);
+      font-weight: bold;
+    }
   }
 
   #first-splash-row {
@@ -297,13 +291,11 @@ a {
     margin-block: 0.75em;
 
     img {
-    height: 5vmin;
-    vertical-align: middle;
-    margin: 2px;
-    }
+      height: 5vmin;
+      vertical-align: middle;
+      margin: 2px;
 
-    @media only screen and (max-width: 600px) {
-      img {
+      @media only screen and (max-width: 600px) {
         height: 24px;
       }
     }
@@ -315,6 +307,7 @@ a {
   }
 }
 
+/* credit logos on bottom right */
 #body-logos {
   margin-left: auto;
   margin-right: 0;
@@ -327,7 +320,19 @@ a {
 }
 
 
-/* Video and text dialogs */
+/* Video dialogs */
+#video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0px;
+  z-index: 1000;
+}
+
 .video-wrapper {
   height: 100%;
   background: black;
@@ -342,19 +347,10 @@ video {
   object-fit: contain;
 }
 
-#video-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  padding: 0px;
-  z-index: 1000;
-}
 
+/* text dialogs */
 .bottom-sheet {
+
   .v-overlay__content {
     align-self: flex-end;
     padding: 0;
@@ -364,6 +360,7 @@ video {
   }
 }
   
+/* Tabs */
 #tabs {
   align-self: left;
 
@@ -413,11 +410,38 @@ video {
     text-decoration: underline;
   }
 
+}
+
+/*
+  These last few blocks contain some hackery related to the text tabs.
+  The close icon isn't part of the standard v-tabs setup, so we need to
+  create some space for that ourselves.
+ */
+ #tab-items {
+  /* padding-bottom: 2px !important; */
+
+  .v-card-text {
+    font-size: ~"max(14px, calc(0.7em + 0.3vw))";
+    padding-top: ~"max(2vw, 16px)";
+    padding-left: ~"max(4vw, 16px)";
+    padding-right: ~"max(4vw, 16px)";
+
+    .end-spacer {
+      height: 25px;
+    }
+  }
 
 }
 
 
 /* Miscellaneous class styling */
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
 .close-icon {
   position: absolute;
   top: 10px;
@@ -434,8 +458,19 @@ video {
   }
 }
 
+#close-text-icon {
+  position: absolute;
+  top: 0.25em;
+  right: calc((3em - 0.6875em) / 3); /* font-awesome-icons have width 0.6875em */
+  color: white;
+}
+
 .pointer {
   cursor: pointer;
+}
+
+.pointer-events {
+  pointer-events: auto;
 }
 
 .control-icon {
@@ -456,31 +491,5 @@ video {
 }
 
 
-/*
-  These last few blocks contain some hackery related to the text tabs.
-  The close icon isn't part of the standard v-tabs setup, so we need to
-  create some space for that ourselves.
- */
-#tab-items {
-  /* padding-bottom: 2px !important; */
-
-  .v-card-text {
-    font-size: ~"max(14px, calc(0.7em + 0.3vw))";
-    padding-top: ~"max(2vw, 16px)";
-    padding-left: ~"max(4vw, 16px)";
-    padding-right: ~"max(4vw, 16px)";
-
-    .end-spacer {
-      height: 25px;
-    }
-  }
-
-}
 
 
-#close-text-icon {
-  position: absolute;
-  top: 0.25em;
-  right: calc((3em - 0.6875em) / 3); /* font-awesome-icons have width 0.6875em */
-  color: white;
-}
