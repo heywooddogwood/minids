@@ -4,6 +4,7 @@ import { FundingAcknowledgment, IconButton } from "@minids/common";
 import JwstBrick from "./JwstBrick.vue";
 import CreditLogos from "./CreditLogos.vue";
 import PlacesGallery from "./PlacesGallery.vue";
+import "../../assets/common.less";
 
 import vuetify from "../plugins/vuetify";
 

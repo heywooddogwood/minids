@@ -246,20 +246,16 @@ a {
 
   #close-splash-button {
     position: absolute;
-
-    @media (max-width: 699px) {
-      top: 0.5rem;
-      right: 1rem;
-    }
-  
-    @media (min-width: 700px) {
-      top: 0rem;
-      right: 1.75rem;
-    }
-
+    top: 0rem;
+    right: 1.75rem;
     text-align: end;
     color: var(--accent-color2);
     font-size: min(8vw, 5vh);
+
+    @media (max-width: 700px) {
+      top: 0.5rem;
+      right: 1rem;
+    }
 
     &:hover {
       cursor: pointer;
@@ -448,7 +444,6 @@ video {
   &:hover {
     cursor: pointer;
   }
-
 }
 
 .scrollable {

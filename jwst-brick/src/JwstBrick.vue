@@ -811,156 +811,8 @@ export default defineComponent({
 });
 </script>
 
+
 <style lang="less">
-@font-face {
-  font-family: "Highway Gothic Narrow";
-  src: url("../../assets/HighwayGothicNarrow.ttf");
-}
-
-:root {
-  --default-font-size: clamp(0.7rem, min(1.7vh, 1.7vw), 1.1rem);
-  --default-line-height: clamp(1rem, min(2.2vh, 2.2vw), 1.6rem);
-}
-
-/* Overall page styling */
-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #000;
-
-  overflow: hidden;
-  -ms-overflow-style: none;
-
-  // We don't want a scrollbar for the overall canvas
-  scrollbar-width: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-body {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-
-
-/*
-  The main content of the mini.
-  The --app-content-height allows the app to shrink when the text is open
- */
-#main-content {
-  position: fixed;
-  width: 100%;
-  height: var(--app-content-height);
-  overflow: hidden;
-
-  transition: height 0.1s ease-in-out;
-}
-
-#app {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  font-size: 11pt;
-
-  .wwtelescope-component {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    border-style: none;
-    border-width: 0;
-    margin: 0;
-    padding: 0;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-
-/* The modal loading window */
-.modal {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#modal-loading {
-  background-color: #000;
-  .container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    .spinner {
-      background-image: url("../../assets/lunar_loader.gif");
-      background-repeat: no-repeat;
-      background-size: contain;
-      width: 3rem;
-      height: 3rem;
-    }
-    p {
-      margin: 0 0 0 1rem;
-      padding: 0;
-      font-size: 150%;
-    }
-  }
-}
-
-#modal-readytostart {
-  cursor: pointer;
-  color: #999;
-
-  &:hover {
-    color: #2aa5f7;
-  }
-
-  div {
-    margin: 0;
-    padding: 0;
-    background-image: url("../../assets/wwt_globe_bg.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    width: 20rem;
-    height: 20rem;
-    max-width: 70%;
-    max-height: 70%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .icon {
-      width: 60%;
-      height: 60%;
-      margin-left: 14%;
-      margin-top: 3%;
-    }
-  }
-}
 
 .ui-text {
   color: #F0AB52;
@@ -1067,128 +919,14 @@ body {
 }
 
 /* Splash screen */
-#splash-overlay {
-  align-items: center;
-  justify-content: center;
-  font-size: min(8vw, 7vh);
-}
-
 #splash-screen {
   color: var(--accent-color);
 
-  @media (max-width: 699px) {
-    max-height: 80vh;
-    max-width: 90vw;
-  }
-
-  @media (min-width: 700px) {
-    max-height: 85vh;
-    max-width: min(70vw, 800px);
-  }
-
-  background-color: black;
-  backdrop-filter: blur(5px);
-  justify-content: space-around;
-  align-content: center;
-  padding-top: 4rem;
-  padding-bottom: 1rem;
-  padding-inline: 0.5rem;
-
   border-radius: 50px;
-  border: min(1.2vw, 0.9vh) solid var(--accent-color);
-  overflow: auto;
-  font-family: 'Highway Gothic Narrow', 'Roboto', sans-serif;
 
-  box-shadow: 0px 0px 25px black;
-
-  div {
-    margin-inline: auto;
-    text-align: center;
-  }
   // make a paragraph inside the div centered horizontally and vertically
   p {
-    font-family: 'Highway Gothic Narrow', 'Roboto', sans-serif;
     font-weight: bold;
-    vertical-align: middle;
-  }
-    
-  p.highlight {  
-    // make uppercase
-    text-transform: uppercase;
-    font-weight: bolder;
-  }
-  
-  p.small {
-    font-size: var(--default-font-size);
-    font-weight: bold;
-  }
-
-  #first-splash-row {
-    width: 100%;
-  }
-
-  #close-splash-button {
-    position: absolute;
-    top: 0.5rem;
-    right: 1.75rem;
-    text-align: end;
-    color: var(--accent-color);
-    font-size: min(8vw, 5vh);
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  #splash-screen-text {
-    // in the grid, the text is in the 2nd column
-    display: flex;
-    flex-direction: column;
-    line-height: 130%;
-    
-  }
-
-  #splash-screen-guide {
-    margin-block: 1.5em;
-    font-size: min(5vw, 4vh);
-    line-height: 140%;
-    width: 75%;
-
-    .v-col{
-      padding: 0;
-    }
-    
-    .svg-inline--fa {
-      color:var(--accent-color);
-      margin: 0 10px;
-    }
-  }
-
-  #splash-screen-acknowledgements {
-    font-size: calc(1.7 * var(--default-font-size));
-    line-height: calc(1.5 * var(--default-line-height));
-    width: 70%; 
-  }
-
-  #splash-screen-logos {
-    margin-block: 0.75em;
-
-    img {
-    height: 5vmin;
-    vertical-align: middle;
-    margin: 2px;
-    }
-
-    @media only screen and (max-width: 600px) {
-      img {
-        height: 24px;
-      }
-    }
-
-    svg {
-      vertical-align: middle;
-      height: 24px;
-    }
   }
 }
 
@@ -1205,21 +943,6 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1;
-  }
-
-  a {
-    text-decoration: none;
-    color: #fff;
-    pointer-events: auto;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    &[class^="share-network"]:hover {
-      text-decoration: none;
-      filter: brightness(75%);
-    }
   }
 
   img {
@@ -1243,144 +966,18 @@ body {
 /* Video and text dialogs */
 
 #video-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  padding: 0px;
-  z-index: 1000;
-
-
-  .close-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 15;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:focus {
-      color: white;
-      border: 2px solid white;
-    }
-  }
 
   .video-wrapper {  
     display: flex;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(2px);
-    text-align: center;
-    z-index: 1000;
   }
 
   video, #info-video {
     margin: auto;
-    height: 85%;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
     // aspect-ratio: 9/17;
     border: 5px solid white;
   }
 
-}
-
-.bottom-sheet {
-  .v-overlay__content {
-    align-self: flex-end;
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
-    height: 34%;
-  }
-}
-
-#tabs {
-  align-self: left;
-}
-
-.info-tabs {
-  @media (max-width: 599px) {
-    padding-inline: 0.75rem;
-    font-size: calc(1.15 * var(--default-font-size));
-  }
-  @media (min-width: 600px) {
-    padding-inline: 2rem;
-  }
-}
-
-.info-text {
-  font-size: var(--default-font-size);
-  line-height: var(--default-line-height);
-  
-  height: 33vh;
-  padding-bottom: 25px;
-
-  & img {
-    max-width: 100%;
-  }
-
-  & h3 {
-    margin-top: calc(var(--default-line-height));
-    margin-bottom: calc(0.3 * var(--default-line-height));
-    color: var(--accent-color2);
-  }
-
-  & p {
-    margin-bottom: calc(0.5 * var(--default-line-height));
-  }
-
-  & a {
-    text-decoration: underline;
-  }
-
-
-}
-
-
-/* Miscellaneous class styling */
-.close-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 15;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:focus {
-    color: white;
-    border: 2px solid white;
-  }
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.control-icon {
-  pointer-events: auto;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-}
-
-.scrollable {
-  overflow-y: auto;
-}
-
-.no-bottom-border-radius {
-  border-bottom-left-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
 }
 
 
@@ -1389,30 +986,12 @@ body {
   The close icon isn't part of the standard v-tabs setup, so we need to
   create some space for that ourselves.
  */
-#tab-items {
-  // padding-bottom: 2px !important;
-
-  .v-card-text {
-    font-size: ~"max(14px, calc(0.7em + 0.3vw))";
-    padding-top: ~"max(2vw, 16px)";
-    padding-left: ~"max(4vw, 16px)";
-    padding-right: ~"max(4vw, 16px)";
-
-    .end-spacer {
-      height: 25px;
-    }
-  }
-
-}
 
 .v-tabs [aria-selected="false"]:not(.v-slide-group-item--active) {
   color: #DDD !important;
 }
 
 #close-text-icon {
-  position: absolute;
-  top: 0.25em;
-  color: white;
 
   @media (max-width: 599px) {
     right: 0.5em;
@@ -1421,7 +1000,6 @@ body {
   @media (min-width: 600px) {
     right: calc((3em - 0.6875em) / 3); // font-awesome-icons have width 0.6875em
   }
-
 }
 
 // This prevents the tabs from having some extra space to the left when the screen is small
@@ -1482,6 +1060,5 @@ img#brick-diagram {
   }
   
 }
-
 
 </style>
